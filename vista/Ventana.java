@@ -125,13 +125,39 @@ public class Ventana extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
         panelBaseDatos.add(scrollPane);
 
+        // Eventos de los botones
+        btnAgregar.addActionListener(e -> agregarCamion());
+        btnActualizar.addActionListener(e -> actualizarCamion());
+        btnEliminar.addActionListener(e -> eliminarCamion());
+        btnLeer.addActionListener(e -> cargarDatos());
 
         // Cargar datos iniciales
         cargarDatos();
     }
 
     private void agregarCamion() {
-        // Lógica de agregar aquí
+        // Lógica de agregar camión
+        try {
+            String patente = txtPatente.getText();
+            String conductor = txtConductor.getText();
+            String ubicacion = txtUbicacion.getText();
+            java.sql.Date fecha = java.sql.Date.valueOf(txtFechaMantenimiento.getText());
+            boolean estado = chkActivo.getState();
+
+            modelo.Camion camion = new modelo.Camion(
+                    0,
+                    patente,
+                    conductor,
+                    ubicacion,
+                    estado,
+                    fecha);
+
+            controlador.agregarCamion(camion);
+            cargarDatos();
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, "Fecha inválida. Use formato AAAA-MM-DD.");
+        }
     }
 
     private void actualizarCamion() {
@@ -144,5 +170,17 @@ public class Ventana extends JFrame {
 
     private void cargarDatos() {
         // Obtener los datos de la base de datos y llenar la tabla
+        tableModel.setRowCount(0);
+
+        for (modelo.Camion camion : controlador.leerCamiones()) {
+            tableModel.addRow(new Object[] {
+                    camion.getId(),
+                    camion.getPatente(),
+                    camion.getConductor(),
+                    camion.getUbicacionGps(),
+                    camion.isEstado(),
+                    camion.getFechaMantenimiento()
+            });
+        }
     }
 }
