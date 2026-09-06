@@ -74,4 +74,19 @@ public class ControladorCamion {
         }
     }
 
+    // Método para eliminar un camión
+    public void eliminarCamion(int id) {
+        String sql = "DELETE FROM camion WHERE id_camion = ?";
+        try {
+            Connection conexion = ConexionDB.conectar();
+            PreparedStatement statement = conexion.prepareStatement(sql);
+
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar camión: " + e.getMessage());
+        }
+    }
+
 }
