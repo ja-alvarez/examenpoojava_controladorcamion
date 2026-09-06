@@ -161,11 +161,51 @@ public class Ventana extends JFrame {
     }
 
     private void actualizarCamion() {
-        // Lógica de actualización aquí
+        // Lógica de actualización
+        int fila = table.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un camión de la tabla.");
+            return;
+        }
+
+        try {
+            int id = (int) tableModel.getValueAt(fila, 0);
+            String patente = txtPatente.getText();
+            String conductor = txtConductor.getText();
+            String ubicacion = txtUbicacion.getText();
+            java.sql.Date fecha = java.sql.Date.valueOf(txtFechaMantenimiento.getText());
+            boolean estado = chkActivo.getState();
+
+            modelo.Camion camion = new modelo.Camion(
+                    id,
+                    patente,
+                    conductor,
+                    ubicacion,
+                    estado,
+                    fecha);
+
+            controlador.actualizarCamion(camion);
+            cargarDatos();
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, "Fecha inválida. Use formato AAAA-MM-DD.");
+        }
     }
 
     private void eliminarCamion() {
-        // Lógica de eliminación aquí
+        // Lógica de eliminación
+        int fila = table.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un camión de la tabla.");
+            return;
+        }
+
+        int id = (int) tableModel.getValueAt(fila, 0);
+
+        controlador.eliminarCamion(id);
+        cargarDatos();
     }
 
     private void cargarDatos() {
