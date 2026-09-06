@@ -1,0 +1,53 @@
+*** Apuntes ***
+ctrl + shift + D 
+javac -cp "lib/*" controlador/*.java modelo/*.java vista/*.java
+java -cp ".;lib/*" vista.Main
+find . -name "*.class" -delete
+
+
+S6_Proyecto SoftForm_Alvarez.zip
+
+// S3_Actividad_Formativa_Alvarez
+
+compilar todo desde la raiz:
+javac datos/*.java gui/*.java Main.java
+
+- 
+javac -cp "lib/*" controlador/*.java modelo/*.java vista/*.java
+java -cp ".;lib/*" vista.Main
+
+ejecutar:
+java Main
+
+alt + z = word wrap
+
+en gitbash (borrar elementos .class para mantener interfaz más limpia durante desarrollo):
+find . -name "*.class" -delete
+
+Persona -> Cliente
+        -> Empleado
+            -> Gerente // public class Gerente extends Empleado
+            -> Tecnico 
+
+if (condicion) {}
+if (!condicion) {}
+
+"String" != 'char' -> cuidado con el tipo de comillas;
+
+git init
+.gitignore
+git add .
+git commit -m "Mensaje commit"
+git push // git push -u origin main
+
+Semana 5:
+
+Informe de pruebas unitarias SoftForm
+
+    Métodos probados, resultados o fallos encontrados, correcciones,
+    +onfiabilidad
+
+    control + shift + p: (reinicio entorno)
+        Java: Clean Java Language Server Workspace
+
+$ java -cp ".;D:/UST Analista Programador 435mb/05 Fundamentos de POO/mysql connector/mysql-connector-j-26.7.0/mysql-connector-j-26.7.0.jar" Main
