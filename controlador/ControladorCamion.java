@@ -51,4 +51,27 @@ public class ControladorCamion {
         return camiones;
     }
 
+    // Falta actualizar y eliminar
+    // Método para actualizar un camion
+    public void actualizarCamion(Camion camion) {
+        String sql = "UPDATE camion SET patente = ?, conductor = ?, ubicacion_gps = ?, estado = ?, fecha_mantenimiento = ? WHERE id_camion = ?";
+
+        try {
+            Connection conexion = ConexionDB.conectar();
+            PreparedStatement statement = conexion.prepareStatement(sql);
+
+            statement.setString(1, camion.getPatente());
+            statement.setString(2, camion.getConductor());
+            statement.setString(3, camion.getUbicacionGps());
+            statement.setBoolean(4, camion.isEstado());
+            statement.setDate(5, camion.getFechaMantenimiento());
+            statement.setInt(6, camion.getId());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar camión: " + e.getMessage());
+        }
+    }
+
 }
