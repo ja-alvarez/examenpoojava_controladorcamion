@@ -153,6 +153,7 @@ public class Ventana extends JFrame {
                     fecha);
 
             controlador.agregarCamion(camion);
+            JOptionPane.showMessageDialog(this, "Camión agregado correctamente.");
             cargarDatos();
 
         } catch (IllegalArgumentException e) {
@@ -186,6 +187,7 @@ public class Ventana extends JFrame {
                     fecha);
 
             controlador.actualizarCamion(camion);
+            JOptionPane.showMessageDialog(this, "Camión actualizado correctamente.");
             cargarDatos();
 
         } catch (IllegalArgumentException e) {
@@ -205,6 +207,7 @@ public class Ventana extends JFrame {
         int id = (int) tableModel.getValueAt(fila, 0);
 
         controlador.eliminarCamion(id);
+        JOptionPane.showMessageDialog(this, "Camión eliminado correctamente.");
         cargarDatos();
     }
 
